@@ -1,24 +1,15 @@
 import math
 import robot_params
 
-l1 = robot_params.link_1_length  # file robot_params for link lengths
-l2 = robot_params.link_2_length
-
+len1 = robot_params.link_1_length  # file robot_params for link lengths
+len2 = robot_params.link_2_length
 
 
 def fw_kin(joint_angles):
     # Compute end effector position [in meters] for the given pair of joint angles [in degrees]
-
-    # convert angles to radians (Note that 3.14 is used instead of math.pi)
-    joint_angles_rad = [angle * (3.14 / 180) for angle in joint_angles]
-
-    # compute end effector position
-    x_end_effector = l1 * math.cos(joint_angles_rad[0]) + l2 * math.cos(
-        joint_angles_rad[0] + joint_angles_rad[1]
-    )
-    y_end_effector = l1 * math.sin(joint_angles_rad[0]) + l2 * math.sin(
-        joint_angles_rad[0] + joint_angles_rad[1]
-    )
+    angles_hodler = [angle * (3.14 / 180) for angle in joint_angles]
+    x_end_effector = len1 * math.cos(angles_hodler[0]) + len2 * math.cos(angles_hodler[0] + angles_hodler[1])
+    y_end_effector = len1 * math.sin(angles_hodler[0]) + len2 * math.sin(angles_hodler[0] + angles_hodler[1])
 
     end_effector_position_analytic = [x_end_effector, y_end_effector]
 
